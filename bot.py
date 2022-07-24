@@ -1,5 +1,13 @@
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from email.mime.base import MIMEBase
+from email import encoders
+
 import logging
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext
 import os
 PORT = int(os.environ.get('PORT', '8443'))
 
@@ -17,9 +25,18 @@ def start(update, context):
     update.message.reply_text('''Hola ! Soy su bot de seguimiento de envíos, encuentre los siguientes comandos para interactuar conmigo.
  /start_tracking: iniciar el proceso de seguimiento''')
 
+# Location Tracking
+LOC, DN, PHOTO = range(3)
 
+def start_tracking(update: Update, context: CallbackContext):
+    user = update.message.from_user
+    logger.info("Driver: %s", user.first_name)
+    update.message.reply_text(
+        'Please share your current GPS location.',
+        reply_markup = ReplyKeyboardRemove(),
+    )
 
-
+    return LOC
 
 
 
