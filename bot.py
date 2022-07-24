@@ -24,50 +24,67 @@ def start(update, context):
 
 
 
-def help(update, context):
-    """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
 
-def echo(update, context):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
 
-def error(update, context):
-    """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
 
-def main():
-    """Start the bot."""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#def help(update, context):
+ #   """Send a message when the command /help is issued."""
+  #  update.message.reply_text('Help!')
+
+#def echo(update, context):
+ #   """Echo the user message."""
+  #  update.message.reply_text(update.message.text)
+
+#def error(update, context):
+ #   """Log Errors caused by Updates."""
+  #  logger.warning('Update "%s" caused error "%s"', update, context.error)
+
+#def main():
+    #"""Start the bot."""
     # Cree el actualizador y pásele el token de su bot.
      # Asegúrese de configurar use_context=True para usar las nuevas devoluciones de llamada basadas en contexto
      # Publicar la versión 12 esto ya no será necesario
-    updater = Updater(TOKEN, use_context=True)
+    #updater = Updater(TOKEN, use_context=True)
 
  # Hacer que el despachador registre a los manejadores
-    dp = updater.dispatcher
+    #dp = updater.dispatcher
 
     # en diferentes comandos - respuesta en Telegram
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("help", help))
+    #dp.add_handler(CommandHandler("start", start))
+    #dp.add_handler(CommandHandler("help", help))
 
     # en mensaje sin comando, es decir, repetir el mensaje en Telegram
-    dp.add_handler(MessageHandler(Filters.text, echo))
+    #dp.add_handler(MessageHandler(Filters.text, echo))
 
   # registrar todos los errores
-    dp.add_error_handler(error)
+    #dp.add_error_handler(error)
 
   # Iniciar el robot
-    updater.start_webhook(
-        listen="0.0.0.0",
-        port=int(PORT),
-        url_path=TOKEN,
-        webhook_url='https://sergesa-bot.herokuapp.com/' + TOKEN
-    )
+  #  updater.start_webhook(
+   #     listen="0.0.0.0",
+    #    port=int(PORT),
+     #   url_path=TOKEN,
+      #  webhook_url='https://sergesa-bot.herokuapp.com/' + TOKEN
+    #)
 
     # Ejecute el bot hasta que presione Ctrl-C o el proceso reciba SIGINT,
      # SIGTERM o SIGABRT. Esto debe usarse la mayor parte del tiempo, ya que
      # start_polling() no bloquea y detendrá el bot con gracia.
-    updater.idle()
+ #   updater.idle()
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+  #  main()
