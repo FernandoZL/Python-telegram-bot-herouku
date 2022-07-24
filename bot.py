@@ -19,6 +19,12 @@ def start(update, context):
 
 ''')
 
+# Location Tracking
+LOC, DN, PHOTO = range(3)
+
+
+
+
 
 def help(update, context):
     """Send a message when the command /help is issued."""
