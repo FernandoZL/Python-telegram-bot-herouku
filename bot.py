@@ -42,6 +42,18 @@ def start_tracking(update: Update, context: CallbackContext):
 
     return LOC
 
+
+def location(update: Update, context: CallbackContext):
+    user = update.message.from_user
+    user_location = update.message.location
+    logger.info("Driver ID location %s: (%s, %s)", user.first_name, user_location.latitude, user_location.longitude)
+    global gps_location
+    gps_location = "({}, {})".format(user_location.latitude, user_location.longitude)
+    update.message.reply_text('Your current GPS location has been recorded. Please enter delivery number.')
+    return DN
+
+
+
 def photo(update: Update, context: CallbackContext):
     user = update.message.from_user
     photo_file = update.message.photo[-1].get_file()
@@ -62,14 +74,6 @@ def photo(update: Update, context: CallbackContext):
     update.message.reply_text('A picture of your shipment has been uploaded. Thank you for your cooperation.')
     return ConversationHandler.END
 
-def location(update: Update, context: CallbackContext):
-    user = update.message.from_user
-    user_location = update.message.location
-    logger.info("Driver ID location %s: (%s, %s)", user.first_name, user_location.latitude, user_location.longitude)
-    global gps_location
-    gps_location = "({}, {})".format(user_location.latitude, user_location.longitude)
-    update.message.reply_text('Your current GPS location has been recorded. Please enter delivery number.')
-    return DN
 
 def delivery_number(update: Update, context: CallbackContext):
     user = update.message.from_user
