@@ -22,6 +22,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 TOKEN = '5530425914:AAEUWQHLPVtM2ksZ6KQS3V8NmGKX_N7-6Sk'
 
+# Your Heroku App Page 
+APP_NAME = 'https://sergesa-bot.herokuapp.com/'
+
 # Definir algunos controladores de comandos. Estos suelen tomar los dos argumentos update y
 # contexto. Los controladores de errores también reciben el objeto 
 def start(update, context):
@@ -106,14 +109,21 @@ def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
-def main():
+#def main():
     """Start the bot."""
     # Cree el actualizador y pásele el token de su bot.
      # Asegúrese de configurar use_context=True para usar las nuevas devoluciones de llamada basadas en contexto
      # Publicar la versión 12 esto ya no será necesario
-    updater = Updater(TOKEN, use_context=True)
+ #   updater = Updater(TOKEN, use_context=True)
 
-# Get the dispatcher to register handlers
+
+
+
+def main():
+    '''Start Bot'''
+    # Launch Updater
+    updater = Updater("{}".format(TOKEN), use_context=True)
+    # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
     # conversions handled by command
@@ -135,6 +145,17 @@ def main():
 
     # log all errors
     dispatcher.add_error_handler(error)
+    # Start the Bot
+    updater.start_webhook(listen="0.0.0.0",
+                          port=PORT,
+                          url_path="{}".format(TOKEN))
+    # updater.bot.set_webhook(url=settings.WEBHOOK_URL)
+    updater.bot.set_webhook("{}".format(APP_NAME) + "{}".format(TOKEN))
+    # start_polling() is non-blocking and will stop the bot gracefully.
+    updater.start_polling()
+    updater.idle()
+
+
 
 
 
@@ -153,18 +174,18 @@ def main():
   #  dp.add_error_handler(error)
 
   # Iniciar el robot
-    updater.start_webhook(
-        listen="0.0.0.0",
-        port=int(PORT),
-        url_path=TOKEN,
-        webhook_url='https://sergesa-bot.herokuapp.com/' + TOKEN
-    )
+  #  updater.start_webhook(
+   #     listen="0.0.0.0",
+    #    port=int(PORT),
+     #   url_path=TOKEN,
+      #  webhook_url='https://sergesa-bot.herokuapp.com/' + TOKEN
+    #)
 
     # Ejecute el bot hasta que presione Ctrl-C o el proceso reciba SIGINT,
      # SIGTERM o SIGABRT. Esto debe usarse la mayor parte del tiempo, ya que
      # start_polling() no bloquea y detendrá el bot con gracia.
      
-    updater.idle()
+    #updater.idle()
 
 if __name__ == '__main__':
     main()
