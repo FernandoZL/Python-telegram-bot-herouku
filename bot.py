@@ -14,7 +14,8 @@ TOKEN = '5530425914:AAEUWQHLPVtM2ksZ6KQS3V8NmGKX_N7-6Sk'
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('¿Hola como estas...?!')
+    update.message.reply_text('''Hello ! I am your shipment tracking bot, please find below commands to interract with me. \n /start_tracking: start tracking process''')
+
 
 def help(update, context):
     """Send a message when the command /help is issued."""
