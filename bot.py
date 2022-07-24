@@ -7,8 +7,13 @@ from email import encoders
 
 import logging
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
-from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext)
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext)   
 import os
+
+
+from mail import *
+import requests
+
 PORT = int(os.environ.get('PORT', '8443'))
 
 # Habilitar registro
@@ -37,6 +42,16 @@ def start_tracking(update: Update, context: CallbackContext):
     )
 
     return LOC
+
+def photo(update: Update, context: CallbackContext):
+    user = update.message.from_user
+    photo_file = update.message.photo[-1].get_file()
+    # photo_file.download('user_photo.jpg')
+
+  # Get link to get file_path
+    link1 = "https://api.telegram.org/bot{}/getfile?file_id={}".format(TOKEN, photo_file.file_id)
+    r = requests.get(link1)
+    file_path = r.json()["result"]["file_path"]
 
 
 
