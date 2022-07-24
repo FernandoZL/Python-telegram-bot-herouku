@@ -13,7 +13,7 @@ TOKEN = '5530425914:AAEUWQHLPVtM2ksZ6KQS3V8NmGKX_N7-6Sk'
 # Definir algunos controladores de comandos. Estos suelen tomar los dos argumentos update y
 # contexto. Los controladores de errores también reciben el objeto 
 def start(update, context):
-    """Enviar un mensaje cuando se emita el comando /start."""
+    """Send a message when the command /start is issued."""
     update.message.reply_text('''Hola ! Soy su bot de seguimiento de envíos, encuentre los siguientes comandos para interactuar conmigo.
  /start_tracking: iniciar el proceso de seguimiento
 
@@ -26,7 +26,7 @@ def start_tracking(update: Update, context: CallbackContext):
     user = update.message.from_user
     logger.info("Driver: %s", user.first_name)
     update.message.reply_text(
-        'Comparta su ubicación GPS actual.',
+        'Please share your current GPS location.',
         reply_markup = ReplyKeyboardRemove(),
     )
 
@@ -34,20 +34,23 @@ def start_tracking(update: Update, context: CallbackContext):
 
 
 
+
+
+
 def help(update, context):
-    """Envíe un mensaje cuando se emita el comando /ayuda."""
+    """Send a message when the command /help is issued."""
     update.message.reply_text('Help!')
 
 def echo(update, context):
-    """Hacer eco del mensaje del usuario."""
+    """Echo the user message."""
     update.message.reply_text(update.message.text)
 
 def error(update, context):
-    """Errores de registro causados por actualizaciones."""
+    """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 def main():
-    """Inicie el bot."""
+    """Start the bot."""
     # Cree el actualizador y pásele el token de su bot.
      # Asegúrese de configurar use_context=True para usar las nuevas devoluciones de llamada basadas en contexto
      # Publicar la versión 12 esto ya no será necesario
