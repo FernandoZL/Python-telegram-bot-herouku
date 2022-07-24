@@ -3,30 +3,30 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 PORT = int(os.environ.get('PORT', '8443'))
 
-# Enable logging
+# Habilitar registro
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 TOKEN = '5530425914:AAEUWQHLPVtM2ksZ6KQS3V8NmGKX_N7-6Sk'
 
-# Define a few command handlers. These usually take the two arguments update and
-# context. Error handlers also receive the raised TelegramError object in error.
+# Definir algunos controladores de comandos. Estos suelen tomar los dos argumentos update y
+# contexto. Los controladores de errores también reciben el objeto 
 def start(update, context):
-    """Send a message when the command /start is issued."""
+    """Enviar un mensaje cuando se emita el comando /start."""
     update.message.reply_text('''Hola ! Soy su bot de seguimiento de envíos, encuentre los siguientes comandos para interactuar conmigo.
  /start_tracking: iniciar el proceso de seguimiento
 
 ''')
 
-# Location Tracking
+# Seguimiento de ubicación
 LOC, DN, PHOTO = range(3)
 
 def start_tracking(update: Update, context: CallbackContext):
     user = update.message.from_user
     logger.info("Driver: %s", user.first_name)
     update.message.reply_text(
-        'Please share your current GPS location.',
+        'Comparta su ubicación GPS actual.',
         reply_markup = ReplyKeyboardRemove(),
     )
 
@@ -35,38 +35,38 @@ def start_tracking(update: Update, context: CallbackContext):
 
 
 def help(update, context):
-    """Send a message when the command /help is issued."""
+    """Envíe un mensaje cuando se emita el comando /ayuda."""
     update.message.reply_text('Help!')
 
 def echo(update, context):
-    """Echo the user message."""
+    """Hacer eco del mensaje del usuario."""
     update.message.reply_text(update.message.text)
 
 def error(update, context):
-    """Log Errors caused by Updates."""
+    """Errores de registro causados por actualizaciones."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 def main():
-    """Start the bot."""
-    # Create the Updater and pass it your bot's token.
-    # Make sure to set use_context=True to use the new context based callbacks
-    # Post version 12 this will no longer be necessary
+    """Inicie el bot."""
+    # Cree el actualizador y pásele el token de su bot.
+     # Asegúrese de configurar use_context=True para usar las nuevas devoluciones de llamada basadas en contexto
+     # Publicar la versión 12 esto ya no será necesario
     updater = Updater(TOKEN, use_context=True)
 
-    # Get the dispatcher to register handlers
+ # Hacer que el despachador registre a los manejadores
     dp = updater.dispatcher
 
-    # on different commands - answer in Telegram
+    # en diferentes comandos - respuesta en Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
 
-    # on noncommand i.e message - echo the message on Telegram
+    # en mensaje sin comando, es decir, repetir el mensaje en Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
-    # log all errors
+  # registrar todos los errores
     dp.add_error_handler(error)
 
-    # Start the Bot
+  # Iniciar el robot
     updater.start_webhook(
         listen="0.0.0.0",
         port=int(PORT),
@@ -74,9 +74,9 @@ def main():
         webhook_url='https://sergesa-bot.herokuapp.com/' + TOKEN
     )
 
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
+    # Ejecute el bot hasta que presione Ctrl-C o el proceso reciba SIGINT,
+     # SIGTERM o SIGABRT. Esto debe usarse la mayor parte del tiempo, ya que
+     # start_polling() no bloquea y detendrá el bot con gracia.
     updater.idle()
 
 if __name__ == '__main__':
