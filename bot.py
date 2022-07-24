@@ -7,7 +7,7 @@ from email import encoders
 
 import logging
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackContext)
 import os
 PORT = int(os.environ.get('PORT', '8443'))
 
@@ -30,7 +30,7 @@ LOC, DN, PHOTO = range(3)
 
 def start_tracking(update: Update, context: CallbackContext):
     user = update.message.from_user
-    logger.info("Driver: %s", user.first_name)
+    logger.info("Driver: %s", user.first_name)  
     update.message.reply_text(
         'Please share your current GPS location.',
         reply_markup = ReplyKeyboardRemove(),
