@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 def start(update, context):
     """Send a message when the command /start is issued."""
     update.message.reply_text('''Hello ! I am your shipment tracking bot, please find below commands to interract with me. \n /start_tracking: start tracking process''')
+<<<<<<< HEAD
 # Location Tracking
 LOC, DN, PHOTO = range(3)
 
@@ -68,6 +69,8 @@ def location(update: Update, context: CallbackContext):
     gps_location = "({}, {})".format(user_location.latitude, user_location.longitude)
     update.message.reply_text('Your current GPS location has been recorded. Please enter delivery number.')
     return DN
+=======
+>>>>>>> parent of d92b3c4 (Mensaje de bienvenida ES)
 
 
 def delivery_number(update: Update, context: CallbackContext):
