@@ -14,8 +14,7 @@ TOKEN = '5530425914:AAEUWQHLPVtM2ksZ6KQS3V8NmGKX_N7-6Sk'
 # contexto. Los controladores de errores también reciben el objeto 
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('''Hola ! Soy su bot de seguimiento de envíos, encuentre los siguientes comandos para interactuar conmigo.
- /start_tracking: iniciar el proceso de seguimiento''')
+    update.message.reply_text('''Hello ! I am your shipment tracking bot, please find below commands to interract with me. \n /start_tracking: start tracking process''')
 
 
 
