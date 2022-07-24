@@ -8,13 +8,13 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-TOKEN = 'TOKEN'
+TOKEN = '5530425914:AAEUWQHLPVtM2ksZ6KQS3V8NmGKX_N7-6Sk'
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('¿Hola como estas?!')
+    update.message.reply_text('¿Hola como estas...?!')
 
 def help(update, context):
     """Send a message when the command /help is issued."""
