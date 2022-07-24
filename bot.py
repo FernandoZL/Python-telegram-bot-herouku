@@ -22,7 +22,15 @@ def start(update, context):
 # Location Tracking
 LOC, DN, PHOTO = range(3)
 
+def start_tracking(update: Update, context: CallbackContext):
+    user = update.message.from_user
+    logger.info("Driver: %s", user.first_name)
+    update.message.reply_text(
+        'Please share your current GPS location.',
+        reply_markup = ReplyKeyboardRemove(),
+    )
 
+    return LOC
 
 
 
